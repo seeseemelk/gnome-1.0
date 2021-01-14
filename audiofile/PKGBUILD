@@ -1,0 +1,36 @@
+pkgname=audiofile-old
+pkgver=0.1.6
+pkgrel=2
+pkgdesc="An old version of AUDIOFILE"
+arch=(x86_64)
+url=""
+depends=()
+license=('GPL')
+source=(
+	"https://ftp.acc.umu.se/pub/GNOME/desktop/1.0/1.0/sources/audiofile-0.1.6.tar.gz"
+	"configure.patch"
+)
+md5sums=('2776dca7d9f907b7b851ac9a4d4fb304'
+         'cada285d91bb2443b93e882d8e06641d')
+
+prepare() {
+	cd "audiofile-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+}
+
+build() {
+	cd "audiofile-$pkgver"
+	./configure \
+		--prefix=/usr
+	make
+}
+
+check() {
+	cd "audiofile-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "audiofile-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
