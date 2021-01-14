@@ -6,11 +6,11 @@ pkgdesc="GNotepad"
 arch=(x86_64)
 url=""
 license=('GPL')
+depends=('gtk-old')
 source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/gnotepad%2B-1.0.8.tar.gz"
 )
-md5sums=('7366f8dafdcfea1076cea9c14ace852c'
-         'cada285d91bb2443b93e882d8e06641d')
+md5sums=('7366f8dafdcfea1076cea9c14ace852c')
 
 prepare() {
 	cd "gnotepad+-$pkgver"
