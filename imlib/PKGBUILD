@@ -1,0 +1,40 @@
+pkgname=imlib
+pkgver=1.9.4
+pkgrel=2
+pkgdesc="An old version of imlib"
+arch=(x86_64)
+url=""
+depends=(glib-old)
+license=('GPL')
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/imlib-1.9.4.tar.gz"
+	"configure.patch"
+	"fix-build-errors.patch"
+	"fix-open-missing-mode.patch"
+)
+md5sums=('8d0e50e28a5b203ff76f114bb38627c7'
+         'cada285d91bb2443b93e882d8e06641d')
+
+prepare() {
+	cd "imlib-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-build-errors.patch"
+	patch -p1 -i "$srcdir/fix-open-missing-mode.patch"
+}
+
+build() {
+	cd "imlib-$pkgver"
+	./configure \
+		--prefix=/usr
+	make
+}
+
+check() {
+	cd "imlib-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "imlib-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
