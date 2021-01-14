@@ -30,5 +30,5 @@ check() {
 
 package() {
 	cd "gnotepad+-$pkgver"
-	make DESTDIR="$pkgdir/" install
+	make prefix="$pkgdir/usr/" install
 }
