@@ -1,0 +1,48 @@
+--- b/gutils.c	2021-01-12 19:40:18.819638188 +0000
++++ a/gutils.c	2021-01-12 20:05:15.587621435 +0000
+@@ -91,6 +91,45 @@
+ }
+ #endif /* NATIVE_WIN32 && __LCC__ */
+ 
++extern gint g_bit_nth_lsf(guint32 mask, gint nth_bit)
++{
++  do
++    {
++      nth_bit++;
++      if (mask & (1 << (guint) nth_bit))
++	return nth_bit;
++    }
++  while (nth_bit < 32);
++  return -1;
++}
++
++extern gint g_bit_nth_msf (guint32 mask, gint nth_bit)
++{
++  if (nth_bit < 0)
++    nth_bit = 32;
++  do
++    {
++      nth_bit--;
++      if (mask & (1 << (guint) nth_bit))
++	return nth_bit;
++    }
++  while (nth_bit > 0);
++  return -1;
++}
++
++extern guint g_bit_storage(guint number)
++{
++  register guint n_bits = 0;
++  
++  do
++    {
++      n_bits++;
++      number >>= 1;
++    }
++  while (number);
++  return n_bits;
++}
++
+ void
+ g_atexit (GVoidFunc func)
+ {

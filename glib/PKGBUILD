@@ -1,0 +1,41 @@
+pkgname=glib-old
+pkgver=1.2.2
+pkgrel=2
+pkgdesc="An old version of GLib"
+arch=(x86_64)
+url=""
+license=('GPL')
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/glib-1.2.2.tar.gz"
+	"configure.patch"
+	"remove-inline.patch"
+	"add-inline-implementation.patch"
+)
+md5sums=('1ecec788b21ae0b6b6debbe5ff9d5c65'
+         'cada285d91bb2443b93e882d8e06641d'
+         'ac1d4865f88cc8c0908b01b570ab08b3'
+         '57dfc51ff7738997acb9f17cb1c0b954')
+
+prepare() {
+	cd "glib-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/remove-inline.patch"
+	patch -p1 -i "$srcdir/add-inline-implementation.patch"
+}
+
+build() {
+	cd "glib-$pkgver"
+	./configure \
+		--prefix=/usr
+	make
+}
+
+check() {
+	cd "glib-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "glib-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
