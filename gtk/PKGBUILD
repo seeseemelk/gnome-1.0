@@ -1,0 +1,36 @@
+pkgname=gtk-old
+pkgver=1.2.2
+pkgrel=2
+pkgdesc="An old version of GTK"
+arch=(x86_64)
+url=""
+depends=(glib-old)
+license=('GPL')
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/gtk%2B-1.2.2.tar.gz"
+	"configure.patch"
+)
+md5sums=('2776dca7d9f907b7b851ac9a4d4fb304'
+         'cada285d91bb2443b93e882d8e06641d')
+
+prepare() {
+	cd "gtk+-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+}
+
+build() {
+	cd "gtk+-$pkgver"
+	./configure \
+		--prefix=/usr
+	make
+}
+
+check() {
+	cd "gtk+-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "gtk+-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
