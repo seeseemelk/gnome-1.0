@@ -20,6 +20,7 @@ prepare() {
 
 build() {
 	cd "gtk+-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2}
 	./configure \
 		--prefix=/usr
 	make
