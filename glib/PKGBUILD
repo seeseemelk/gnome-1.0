@@ -18,6 +18,7 @@ md5sums=('1ecec788b21ae0b6b6debbe5ff9d5c65'
 
 prepare() {
 	cd "glib-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
 	patch -p1 -i "$srcdir/configure.patch"
 	patch -p1 -i "$srcdir/remove-inline.patch"
 	patch -p1 -i "$srcdir/add-inline-implementation.patch"
