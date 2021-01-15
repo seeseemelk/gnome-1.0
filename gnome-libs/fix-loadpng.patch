@@ -1,0 +1,21 @@
+--- a/tools/convertrgb/loadpng.c	1998-10-27 14:24:48.000000000 +0100
++++ b/tools/convertrgb/loadpng.c	2021-01-15 20:02:33.249181805 +0100
+@@ -29,17 +29,12 @@
+ 	return NULL;
+      }
+ 
+-   if (setjmp(png_ptr->jmpbuf))
++   if (setjmp(png_jmpbuf(png_ptr)))
+      {
+ 	png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+ 	return NULL;
+      }
+ 
+-   if (info_ptr->color_type == PNG_COLOR_TYPE_RGB_ALPHA)
+-     {
+-	png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+-	return NULL;
+-     }
+    png_init_io(png_ptr, f);
+    /* Read Header */
+    png_read_info(png_ptr, info_ptr);

@@ -1,0 +1,142 @@
+--- gnome-libs-1.0.16/configure	1999-09-01 07:29:18.000000000 +0200
++++ b/configure	2021-01-15 08:33:00.192436848 +0100
+@@ -8237,137 +8237,10 @@
+ fi
+ 
+ 
+-DB_LIB=
+-echo $ac_n "checking for dbopen""... $ac_c" 1>&6
+-echo "configure:8243: checking for dbopen" >&5
+-if eval "test \"`echo '$''{'ac_cv_func_dbopen'+set}'`\" = set"; then
+-  echo $ac_n "(cached) $ac_c" 1>&6
+-else
+-  cat > conftest.$ac_ext <<EOF
+-#line 8248 "configure"
+-#include "confdefs.h"
+-/* System header to define __stub macros and hopefully few prototypes,
+-    which can conflict with char dbopen(); below.  */
+-#include <assert.h>
+-/* Override any gcc2 internal prototype to avoid an error.  */
+-/* We use char because int might match the return type of a gcc2
+-    builtin and then its argument prototype would still apply.  */
+-char dbopen();
+-
+-int main() {
+-
+-/* The GNU C library defines this for functions which it implements
+-    to always fail with ENOSYS.  Some functions are actually named
+-    something starting with __ and the normal name is an alias.  */
+-#if defined (__stub_dbopen) || defined (__stub___dbopen)
+-choke me
+-#else
+-dbopen();
+-#endif
+-
+-; return 0; }
+-EOF
+-if { (eval echo configure:8271: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+-  rm -rf conftest*
+-  eval "ac_cv_func_dbopen=yes"
+-else
+-  echo "configure: failed program was:" >&5
+-  cat conftest.$ac_ext >&5
+-  rm -rf conftest*
+-  eval "ac_cv_func_dbopen=no"
+-fi
+-rm -f conftest*
+-fi
+-
+-if eval "test \"`echo '$ac_cv_func_'dbopen`\" = yes"; then
+-  echo "$ac_t""yes" 1>&6
+-  :
+-else
+-  echo "$ac_t""no" 1>&6
+-echo $ac_n "checking for dbopen in -ldb""... $ac_c" 1>&6
+-echo "configure:8289: checking for dbopen in -ldb" >&5
+-ac_lib_var=`echo db'_'dbopen | sed 'y%./+-%__p_%'`
+-if eval "test \"`echo '$''{'ac_cv_lib_$ac_lib_var'+set}'`\" = set"; then
+-  echo $ac_n "(cached) $ac_c" 1>&6
+-else
+-  ac_save_LIBS="$LIBS"
+-LIBS="-ldb  $LIBS"
+-cat > conftest.$ac_ext <<EOF
+-#line 8297 "configure"
+-#include "confdefs.h"
+-/* Override any gcc2 internal prototype to avoid an error.  */
+-/* We use char because int might match the return type of a gcc2
+-    builtin and then its argument prototype would still apply.  */
+-char dbopen();
+-
+-int main() {
+-dbopen()
+-; return 0; }
+-EOF
+-if { (eval echo configure:8308: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+-  rm -rf conftest*
+-  eval "ac_cv_lib_$ac_lib_var=yes"
+-else
+-  echo "configure: failed program was:" >&5
+-  cat conftest.$ac_ext >&5
+-  rm -rf conftest*
+-  eval "ac_cv_lib_$ac_lib_var=no"
+-fi
+-rm -f conftest*
++DB_LIB=-ldb
++eval "ac_cv_func_dbopen=yes"
+ LIBS="$ac_save_LIBS"
+ 
+-fi
+-if eval "test \"`echo '$ac_cv_lib_'$ac_lib_var`\" = yes"; then
+-  echo "$ac_t""yes" 1>&6
+-  DB_LIB="-ldb"
+-else
+-  echo "$ac_t""no" 1>&6
+-echo $ac_n "checking for dbopen in -ldb1""... $ac_c" 1>&6
+-echo "configure:8327: checking for dbopen in -ldb1" >&5
+-ac_lib_var=`echo db1'_'dbopen | sed 'y%./+-%__p_%'`
+-if eval "test \"`echo '$''{'ac_cv_lib_$ac_lib_var'+set}'`\" = set"; then
+-  echo $ac_n "(cached) $ac_c" 1>&6
+-else
+-  ac_save_LIBS="$LIBS"
+-LIBS="-ldb1  $LIBS"
+-cat > conftest.$ac_ext <<EOF
+-#line 8335 "configure"
+-#include "confdefs.h"
+-/* Override any gcc2 internal prototype to avoid an error.  */
+-/* We use char because int might match the return type of a gcc2
+-    builtin and then its argument prototype would still apply.  */
+-char dbopen();
+-
+-int main() {
+-dbopen()
+-; return 0; }
+-EOF
+-if { (eval echo configure:8346: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+-  rm -rf conftest*
+-  eval "ac_cv_lib_$ac_lib_var=yes"
+-else
+-  echo "configure: failed program was:" >&5
+-  cat conftest.$ac_ext >&5
+-  rm -rf conftest*
+-  eval "ac_cv_lib_$ac_lib_var=no"
+-fi
+-rm -f conftest*
+-LIBS="$ac_save_LIBS"
+-
+-fi
+-if eval "test \"`echo '$ac_cv_lib_'$ac_lib_var`\" = yes"; then
+-  echo "$ac_t""yes" 1>&6
+-  DB_LIB="-ldb1"
+-else
+-  echo "$ac_t""no" 1>&6
+-{ echo "configure: error: Your db library is missing db 1.85 compatibility mode" 1>&2; exit 1; }
+-fi
+-
+-fi
+-
+-fi
+-
+-
+ for ac_hdr in db.h db_185.h db1/db.h
+ do
+ ac_safe=`echo "$ac_hdr" | sed 'y%./+-%__p_%'`
