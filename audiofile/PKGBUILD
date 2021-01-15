@@ -1,6 +1,6 @@
 pkgname=audiofile-old
 pkgver=0.1.6
-pkgrel=2
+pkgrel=3
 pkgdesc="An old version of AUDIOFILE"
 arch=(x86_64)
 url=""
@@ -9,13 +9,16 @@ license=('GPL')
 source=(
 	"https://ftp.acc.umu.se/pub/GNOME/desktop/1.0/1.0/sources/audiofile-0.1.6.tar.gz"
 	"configure.patch"
+	"fix-ltconfig.patch"
 )
 md5sums=('787c59576393dfb7bdc1a2d2da67441e'
-         'cada285d91bb2443b93e882d8e06641d')
+         'cada285d91bb2443b93e882d8e06641d'
+         'ec70a78265e8c81c9c8713b7c1ad1dd4')
 
 prepare() {
 	cd "audiofile-$pkgver"
 	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
 }
 
 build() {
