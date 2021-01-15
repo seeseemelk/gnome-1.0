@@ -46,4 +46,7 @@ check() {
 package() {
 	cd "gnome-libs-$pkgver"
 	make DESTDIR="$pkgdir/" install
+	rm -rf "$pkgdir/home"
+	mv "$pkgdir/usr/sbin/gnome-pty-helper" "$pkgdir/usr/bin"
+	rm -rf "$pkgdir/usr/sbin"
 }
