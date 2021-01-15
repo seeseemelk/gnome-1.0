@@ -1,0 +1,52 @@
+From 08e71d3798da5830fb5f8cbace764ca48953dd1b Mon Sep 17 00:00:00 2001
+From: Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>
+Date: Fri, 15 Jan 2021 19:45:09 +0100
+Subject: [PATCH] iiop: fix build errors
+
+---
+ src/IIOP/iiop-encoders.h |  4 ++--
+ src/IIOP/iiop-endian.h   | 12 ------------
+ 2 files changed, 2 insertions(+), 14 deletions(-)
+
+diff --git a/src/IIOP/iiop-encoders.h b/src/IIOP/iiop-encoders.h
+index b65ef9a..33d7d8e 100644
+--- a/src/IIOP/iiop-encoders.h
++++ b/src/IIOP/iiop-encoders.h
+@@ -2,11 +2,11 @@
+ #define ENCODERS_H 1
+ 
+ #define ENCODER_DEC(typename) \
+-void giop_encoder_##typename##(GIOPSendBuffer *send_buffer, \
++void giop_encoder_##typename(GIOPSendBuffer *send_buffer, \
+ 			       const typename *mem)
+ 
+ #define ENCODER_CALL(typename, mem) \
+-giop_encoder_##typename##(send_buffer, mem)
++giop_encoder_##typename(send_buffer, mem)
+ 
+ #define AP(m, l) giop_message_buffer_append_mem(GIOP_MESSAGE_BUFFER(send_buffer), m, l)
+ #define APA(m, l) giop_message_buffer_append_mem_a(GIOP_MESSAGE_BUFFER(send_buffer), m, l)
+diff --git a/src/IIOP/iiop-endian.h b/src/IIOP/iiop-endian.h
+index 358a5e0..5580350 100644
+--- a/src/IIOP/iiop-endian.h
++++ b/src/IIOP/iiop-endian.h
+@@ -27,16 +27,4 @@ void iiop_byteswap(guchar *outdata,
+ 		   const guchar *data,
+ 		   gulong datalen);
+ 
+-#ifdef G_CAN_INLINE
+-G_INLINE_FUNC void iiop_byteswap(guchar *outdata,
+-				 const guchar *data,
+-				 gulong datalen)
+-{
+-  const guchar *source_ptr = data;
+-  guchar *dest_ptr = outdata + datalen - 1;
+-  while(dest_ptr >= outdata)
+-    *dest_ptr-- = *source_ptr++;
+-}
+-#endif
+-
+ #endif
+-- 
+2.30.0
+

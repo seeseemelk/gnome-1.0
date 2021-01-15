@@ -1,0 +1,45 @@
+pkgname=orbit
+pkgver=0.4.93
+pkgrel=1
+pkgdesc="ORBit"
+arch=(x86_64)
+url=""
+depends=()
+license=('GPL')
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/ORBit-0.4.93.tar.gz"
+	"configure.patch"
+	"parser.patch"
+	"iiop.patch"
+)
+md5sums=('8449f1491235ae6019dc702fbb0da3b5'
+         'cada285d91bb2443b93e882d8e06641d'
+         'a2aef73614634700e3688df514f1c088'
+         '0d09b129401b6814e3bdea165943c353')
+
+prepare() {
+	cd "ORBit-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/configure.patch" -d libIDL
+	patch -p1 -i "$srcdir/configure.patch" -d popt
+	patch -p1 -i "$srcdir/parser.patch"
+	patch -p1 -i "$srcdir/iiop.patch"
+}
+
+build() {
+	cd "ORBit-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
+	./configure \
+		--prefix=/usr
+	make -j1
+}
+
+check() {
+	cd "ORBit-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "ORBit-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
