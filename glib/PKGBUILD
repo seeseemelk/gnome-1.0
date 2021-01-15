@@ -1,6 +1,6 @@
 pkgname=glib-old
 pkgver=1.2.2
-pkgrel=2
+pkgrel=3
 pkgdesc="An old version of GLib"
 arch=(x86_64)
 url=""
@@ -8,11 +8,13 @@ license=('GPL')
 source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/glib-1.2.2.tar.gz"
 	"configure.patch"
+	"fix-ltconfig.patch"
 	"remove-inline.patch"
 	"add-inline-implementation.patch"
 )
 md5sums=('1ecec788b21ae0b6b6debbe5ff9d5c65'
          'cada285d91bb2443b93e882d8e06641d'
+         '270d0c40762de3186bc7ee3318df6cfd'
          'ac1d4865f88cc8c0908b01b570ab08b3'
          '57dfc51ff7738997acb9f17cb1c0b954')
 
@@ -20,6 +22,7 @@ prepare() {
 	cd "glib-$pkgver"
 	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
 	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
 	patch -p1 -i "$srcdir/remove-inline.patch"
 	patch -p1 -i "$srcdir/add-inline-implementation.patch"
 }
@@ -27,7 +30,8 @@ prepare() {
 build() {
 	cd "glib-$pkgver"
 	./configure \
-		--prefix=/usr
+		--prefix=/usr \
+		--disable-static
 	make
 }
 

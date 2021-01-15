@@ -1,0 +1,20 @@
+--- a/ltconfig	1999-03-21 08:05:58.000000000 +0100
++++ b/ltconfig	2021-01-15 21:37:57.732510860 +0100
+@@ -1587,7 +1587,7 @@
+ deplibs_check_method='unknown'
+ # Need to set the preceding variable on all platforms that support
+ # interlibrary dependencies.
+-# 'none' -- dependencies not supported.
++# 'none' -- dependencies not supported
+ # `unknown' -- same as none, but documents that we really don't know.
+ # 'pass_all' -- all dependencies passed with no checks.
+ # 'test_compile' -- check by making test program.
+@@ -1749,7 +1749,7 @@
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-gnu* | x86_64-sysv64)
+   version_type=linux
+   need_lib_prefix=no
+   need_version=no
