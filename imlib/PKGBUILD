@@ -13,7 +13,9 @@ source=(
 	"fix-open-missing-mode.patch"
 )
 md5sums=('8d0e50e28a5b203ff76f114bb38627c7'
-         'cada285d91bb2443b93e882d8e06641d')
+         '6478976838c0419de12b0a8b7fffafd4'
+         'c6ac6f9647743b0d1373437b6100cf37'
+         'f811e6c4e7370a4f4f8a1d0d1a583d5e')
 
 prepare() {
 	cd "imlib-$pkgver"
