@@ -10,7 +10,7 @@ source=(
 	"https://ftp.acc.umu.se/pub/GNOME/desktop/1.0/1.0/sources/audiofile-0.1.6.tar.gz"
 	"configure.patch"
 )
-md5sums=('2776dca7d9f907b7b851ac9a4d4fb304'
+md5sums=('787c59576393dfb7bdc1a2d2da67441e'
          'cada285d91bb2443b93e882d8e06641d')
 
 prepare() {
@@ -20,6 +20,7 @@ prepare() {
 
 build() {
 	cd "audiofile-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2}
 	./configure \
 		--prefix=/usr
 	make
