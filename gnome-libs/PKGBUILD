@@ -1,6 +1,6 @@
 pkgname=gnome-libs
 pkgver=1.0.16
-pkgrel=1
+pkgrel=2
 pkgdesc="An old version of Gnome Libs"
 arch=(x86_64)
 url=""
@@ -10,6 +10,7 @@ source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/gnome-libs-1.0.16.tar.gz"
 	"configure.patch"
 	"configure-db185.patch"
+	"fix-ltconfig.patch"
 	"fix-libpng.patch"
 	"fix-colors.patch"
 	"fix-loadpng.patch"
@@ -17,6 +18,7 @@ source=(
 md5sums=('7bbaf7b947326ca8d42beca74ae35919'
          'cada285d91bb2443b93e882d8e06641d'
          '91ba5ecb15e0c94a48ac4c17475117ca'
+         'ec70a78265e8c81c9c8713b7c1ad1dd4'
          '368832242792ed3078832f03726b7a24'
          'e229c67cc3bcf49f89a0ab4f1723c115'
          'b151bc97b81e8455de68dbc9fda74416')
@@ -25,6 +27,7 @@ prepare() {
 	cd "gnome-libs-$pkgver"
 	patch -p1 -i "$srcdir/configure.patch"
 	patch -p1 -i "$srcdir/configure-db185.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
 	patch -p1 -i "$srcdir/fix-libpng.patch"
 	patch -p1 -i "$srcdir/fix-colors.patch"
 	patch -p1 -i "$srcdir/fix-loadpng.patch"
@@ -34,7 +37,8 @@ build() {
 	cd "gnome-libs-$pkgver"
 	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2}
 	./configure \
-		--prefix=/usr
+		--prefix=/usr \
+		--disable-static
 	make
 }
 
