@@ -1,0 +1,56 @@
+--- a/freecell/src/io-gtk.c	1999-03-12 21:55:59.000000000 +0100
++++ b/freecell/src/io-gtk.c	2021-01-16 12:02:37.312459944 +0100
+@@ -49,7 +49,7 @@
+ #define FIELD_WIDTH card_image_width()
+ #define FIELD_HEIGHT card_image_top_height() * 14
+ 
+-static GtkWidget *main_window;
++GtkWidget *main_window;
+ static GtkWidget *mb;
+ 
+ static GtkWidget *freecell_drawing_areas[4];
+--- a/gturing/gturing.c	1999-02-24 19:34:37.000000000 +0100
++++ b/gturing/gturing.c	2021-01-16 12:03:14.535767026 +0100
+@@ -36,8 +36,8 @@
+ 
+ /* A few globals. */
+ static char *progname;
+-static char tape_string[1024] = "";
+-static char states_fname[1024] = "";
++char tape_string[1024] = "";
++char states_fname[1024] = "";
+ 
+ static turing *tm;
+ static long speed = 0;
+--- a/gyahtzee/setup.c	1999-02-14 07:24:26.000000000 +0100
++++ b/gyahtzee/setup.c	2021-01-16 12:03:35.905743019 +0100
+@@ -55,6 +55,7 @@
+                 GyahtzeeAbort = 1;
+ 		break;
+ 	default:
++		break;
+ 	}
+ 
+ 	return;
+--- a/gyahtzee/yahtzee.h	1998-10-18 23:59:59.000000000 +0200
++++ b/gyahtzee/yahtzee.h	2021-01-16 12:04:06.669030990 +0100
+@@ -85,7 +85,7 @@
+ extern int IsCheater;
+ extern char *ProgramHeader;
+ extern char *FieldLabels[NUM_FIELDS+EXTRA_FIELDS];
+-char *DefaultPlayerNames[MAX_NUMBER_OF_PLAYERS];
++extern char *DefaultPlayerNames[MAX_NUMBER_OF_PLAYERS];
+ 
+ extern void YahtzeeInit(void);
+ extern void NewGame(void);
+--- a/metatris/Makefile.in	1999-03-19 01:28:51.000000000 +0100
++++ b/metatris/Makefile.in	2021-01-16 12:09:18.784662806 +0100
+@@ -254,7 +254,7 @@
+ 
+ metatris: $(metatris_OBJECTS) $(metatris_DEPENDENCIES)
+ 	@rm -f metatris
+-	$(LINK) $(metatris_LDFLAGS) $(metatris_OBJECTS) $(metatris_LDADD) $(LIBS)
++	$(LINK) $(metatris_OBJECTS) $(metatris_LDADD) $(LIBS) $(metatris_LDFLAGS) 
+ 
+ install-appiconDATA: $(appicon_DATA)
+ 	@$(NORMAL_INSTALL)
