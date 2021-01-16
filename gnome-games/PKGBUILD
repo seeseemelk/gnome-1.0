@@ -57,4 +57,27 @@ package() {
 		robots.png windows.png yahoo.png
 	install -m644 -t "$pkgdir/usr/share/pixmaps" gnome-gnobots.png
 	cd ..
+
+	cd gnobots2
+	# Executable
+	install -Dm755 gnobots2 "$pkgdir/usr/bin/gnobots2"
+	# Pixmaps
+	install -dm755 "$pkgdir/usr/share/pixmaps/gnobots2"
+	install -m644 -t "$pkgdir/usr/share/pixmaps/gnobots2" \
+		gnomes.png cows.png eggs.png mice.png robots.png \
+		yahoo.png aieee.png splat.png
+	# App icon
+	install -m644 -t "$pkgdir/usr/share/pixmaps" gnome-gnobots2.png
+	# Configs
+	install -dm755 "$pkgdir/usr/share/gnobots2"
+	install -m644 -t "$pkgdir/usr/share/gnobots2" \
+		robots2.cfg robots2_easy.cfg classic_robots.cfg \
+		robots_with_safe_teleport.cfg nightmare.cfg
+	# Sound lists
+	install -Dm644 gnobots2.soundlist "$pkgdir/usr/etc/sound/events/gnobots2.soundlist"
+	# Sounds
+	install -dm755 "$pkgdir/usr/share/sounds/gnobots2"
+	install -m644 -t "$pkgdir/usr/share/sounds/gnobots2" \
+		bad.wav die.wav splat.wav teleport.wav victory.wav yahoo.wav
+	cd ..
 }
