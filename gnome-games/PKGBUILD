@@ -44,5 +44,17 @@ check() {
 
 package() {
 	cd "gnome-games-$pkgver"
-	make DESTDIR="$pkgdir/" install -C gnomine
+
+	cd gnomine
+	install -Dm755 gnomine "$pkgdir/usr/bin/gnomine"
+	cd ..
+
+	cd gnobots
+	install -Dm755 gnobots "$pkgdir/usr/bin/gnobots"
+	install -dm755 "$pkgdir/usr/share/pixmaps/gnobots"
+	install -m644 -t "$pkgdir/usr/share/pixmaps/gnobots" \
+		aieee.png cows.png eggs.png gnomes.png mice.png \
+		robots.png windows.png yahoo.png
+	install -m644 -t "$pkgdir/usr/share/pixmaps" gnome-gnobots.png
+	cd ..
 }
