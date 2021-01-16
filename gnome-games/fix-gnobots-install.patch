@@ -1,0 +1,52 @@
+--- a/gnobots/Makefile.am	1999-02-18 00:25:55.000000000 +0100
++++ b/gnobots/Makefile.am	2021-01-16 19:13:55.545275697 +0100
+@@ -1,9 +1,9 @@
+-scoredir=$(localstatedir)/games
+-pixmapdir=$(datadir)/pixmaps/gnobots
+-appicondir=$(datadir)/pixmaps
+-Gamesdir = $(datadir)/gnome/apps/Games
++scoredir=$(DESTDIR)$(localstatedir)/games
++pixmapdir=$(DESTDIR)$(datadir)/pixmaps/gnobots
++appicondir=$(DESTDIR)$(datadir)/pixmaps
++Gamesdir=$(DESTDIR)$(datadir)/gnome/apps/Games
+ 
+-SUBDIRS = help
++SUBDIRS = 
+ 
+ INCLUDES = 			\
+ 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+--- a/gnobots/Makefile.in	1999-03-19 01:28:28.000000000 +0100
++++ b/gnobots/Makefile.in	2021-01-16 19:13:58.278608060 +0100
+@@ -124,12 +124,12 @@
+ ZVT_LIBS = @ZVT_LIBS@
+ l = @l@
+ 
+-scoredir = $(localstatedir)/games
+-pixmapdir = $(datadir)/pixmaps/gnobots
+-appicondir = $(datadir)/pixmaps
+-Gamesdir = $(datadir)/gnome/apps/Games
++scoredir = $(DESTDIR)$(localstatedir)/games
++pixmapdir = $(DESTDIR)$(datadir)/pixmaps/gnobots
++appicondir = $(DESTDIR)$(datadir)/pixmaps
++Gamesdir = $(DESTDIR)$(datadir)/gnome/apps/Games
+ 
+-SUBDIRS = help
++SUBDIRS =
+ 
+ INCLUDES =  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	-I$(includedir)				 	$(GNOME_INCLUDEDIR)
+ 
+@@ -517,12 +517,11 @@
+ install-data-local:
+ 	-$(mkinstalldirs) $(scoredir)
+ 	-touch $(scoredir)/gnobots.unsafe.scores
+-	-chown games.games $(scoredir)/gnobots.unsafe.scores
++	-chown nobody.users $(scoredir)/gnobots.unsafe.scores
+ 	-chmod 664 $(scoredir)/gnobots.unsafe.scores
+ 	-touch $(scoredir)/gnobots.safe.scores
+-	-chown games.games $(scoredir)/gnobots.safe.scores
++	-chown nobody.users $(scoredir)/gnobots.safe.scores
+ 	-chmod 664 $(scoredir)/gnobots.safe.scores
+-	-chgrp games $(bindir)/gnobots && chmod 2111 $(bindir)/gnobots
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.

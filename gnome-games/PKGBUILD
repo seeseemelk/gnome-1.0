@@ -11,16 +11,21 @@ source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/gnome-games-1.0.2.tar.gz"
 	"configure.patch"
 	"fix-build-errors.patch"
-	"fix-install-errors.patch"
+	"fix-same-gnome-install.patch"
+	"fix-gnobots-install.patch"
 )
 md5sums=('1fbe5076d9234522f6f6401e672a02fe'
-         'cada285d91bb2443b93e882d8e06641d')
+         'cada285d91bb2443b93e882d8e06641d'
+         '191f71f74a1fbdc3a76068995a351df6'
+         '1c315de0e3b6d6ee801a871f53f2ecee'
+         'c9d2698aa1566ebf876df51c74109daa')
 
 prepare() {
 	cd "gnome-games-$pkgver"
 	patch -p1 -i "$srcdir/configure.patch"
 	patch -p1 -i "$srcdir/fix-build-errors.patch"
-	patch -p1 -i "$srcdir/fix-install-errors.patch"
+	patch -p1 -i "$srcdir/fix-same-gnome-install.patch"
+	patch -p1 -i "$srcdir/fix-gnobots-install.patch"
 }
 
 build() {
@@ -39,5 +44,5 @@ check() {
 
 package() {
 	cd "gnome-games-$pkgver"
-	make DESTDIR="$pkgdir/" install
+	make DESTDIR="$pkgdir/" install -C gnomine
 }
