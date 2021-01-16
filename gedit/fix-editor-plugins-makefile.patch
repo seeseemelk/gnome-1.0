@@ -1,0 +1,66 @@
+--- a/editor-plugins/Makefile.in	1999-02-28 01:34:47.000000000 +0100
++++ b/editor-plugins/Makefile.in	2021-01-16 11:38:51.918888151 +0100
+@@ -314,51 +314,51 @@
+ 
+ cvsdiff-plugin: $(cvsdiff_plugin_OBJECTS) $(cvsdiff_plugin_DEPENDENCIES)
+ 	@rm -f cvsdiff-plugin
+-	$(LINK) $(cvsdiff_plugin_LDFLAGS) $(cvsdiff_plugin_OBJECTS) $(cvsdiff_plugin_LDADD) $(LIBS)
++	$(LINK) $(cvsdiff_plugin_OBJECTS) $(cvsdiff_plugin_LDADD) $(LIBS) $(cvsdiff_plugin_LDFLAGS)
+ 
+ encrypt-plugin: $(encrypt_plugin_OBJECTS) $(encrypt_plugin_DEPENDENCIES)
+ 	@rm -f encrypt-plugin
+-	$(LINK) $(encrypt_plugin_LDFLAGS) $(encrypt_plugin_OBJECTS) $(encrypt_plugin_LDADD) $(LIBS)
++	$(LINK) $(encrypt_plugin_OBJECTS) $(encrypt_plugin_LDADD) $(LIBS) $(encrypt_plugin_LDFLAGS)
+ 
+ openother-plugin: $(openother_plugin_OBJECTS) $(openother_plugin_DEPENDENCIES)
+ 	@rm -f openother-plugin
+-	$(LINK) $(openother_plugin_LDFLAGS) $(openother_plugin_OBJECTS) $(openother_plugin_LDADD) $(LIBS)
++	$(LINK) $(openother_plugin_OBJECTS) $(openother_plugin_LDADD) $(LIBS) $(openother_plugin_LDFLAGS)
+ 
+ reverse-plugin: $(reverse_plugin_OBJECTS) $(reverse_plugin_DEPENDENCIES)
+ 	@rm -f reverse-plugin
+-	$(LINK) $(reverse_plugin_LDFLAGS) $(reverse_plugin_OBJECTS) $(reverse_plugin_LDADD) $(LIBS)
++	$(LINK) $(reverse_plugin_OBJECTS) $(reverse_plugin_LDADD) $(LIBS) $(reverse_plugin_LDFLAGS)
+ 
+ testselect-plugin: $(testselect_plugin_OBJECTS) $(testselect_plugin_DEPENDENCIES)
+ 	@rm -f testselect-plugin
+-	$(LINK) $(testselect_plugin_LDFLAGS) $(testselect_plugin_OBJECTS) $(testselect_plugin_LDADD) $(LIBS)
++	$(LINK) $(testselect_plugin_OBJECTS) $(testselect_plugin_LDADD) $(LIBS) $(testselect_plugin_LDFLAGS)
+ 
+ hello-plugin: $(hello_plugin_OBJECTS) $(hello_plugin_DEPENDENCIES)
+ 	@rm -f hello-plugin
+-	$(LINK) $(hello_plugin_LDFLAGS) $(hello_plugin_OBJECTS) $(hello_plugin_LDADD) $(LIBS)
++	$(LINK) $(hello_plugin_OBJECTS) $(hello_plugin_LDADD) $(LIBS) $(hello_plugin_LDFLAGS)
+ 
+ convert-plugin: $(convert_plugin_OBJECTS) $(convert_plugin_DEPENDENCIES)
+ 	@rm -f convert-plugin
+-	$(LINK) $(convert_plugin_LDFLAGS) $(convert_plugin_OBJECTS) $(convert_plugin_LDADD) $(LIBS)
++	$(LINK) $(convert_plugin_OBJECTS) $(convert_plugin_LDADD) $(LIBS) $(convert_plugin_LDFLAGS)
+ 
+ diff-plugin: $(diff_plugin_OBJECTS) $(diff_plugin_DEPENDENCIES)
+ 	@rm -f diff-plugin
+-	$(LINK) $(diff_plugin_LDFLAGS) $(diff_plugin_OBJECTS) $(diff_plugin_LDADD) $(LIBS)
++	$(LINK) $(diff_plugin_OBJECTS) $(diff_plugin_LDADD) $(LIBS) $(diff_plugin_LDFLAGS)
+ 
+ email-plugin: $(email_plugin_OBJECTS) $(email_plugin_DEPENDENCIES)
+ 	@rm -f email-plugin
+-	$(LINK) $(email_plugin_LDFLAGS) $(email_plugin_OBJECTS) $(email_plugin_LDADD) $(LIBS)
++	$(LINK) $(email_plugin_OBJECTS) $(email_plugin_LDADD) $(LIBS) $(email_plugin_LDFLAGS)
+ 
+ browse-plugin: $(browse_plugin_OBJECTS) $(browse_plugin_DEPENDENCIES)
+ 	@rm -f browse-plugin
+-	$(LINK) $(browse_plugin_LDFLAGS) $(browse_plugin_OBJECTS) $(browse_plugin_LDADD) $(LIBS)
++	$(LINK) $(browse_plugin_OBJECTS) $(browse_plugin_LDADD) $(LIBS) $(browse_plugin_LDFLAGS)
+ 
+ spell-plugin: $(spell_plugin_OBJECTS) $(spell_plugin_DEPENDENCIES)
+ 	@rm -f spell-plugin
+-	$(LINK) $(spell_plugin_LDFLAGS) $(spell_plugin_OBJECTS) $(spell_plugin_LDADD) $(LIBS)
++	$(LINK) $(spell_plugin_OBJECTS) $(spell_plugin_LDADD) $(LIBS) $(spell_plugin_LDFLAGS)
+ 
+ httpview-plugin: $(httpview_plugin_OBJECTS) $(httpview_plugin_DEPENDENCIES)
+ 	@rm -f httpview-plugin
+-	$(LINK) $(httpview_plugin_LDFLAGS) $(httpview_plugin_OBJECTS) $(httpview_plugin_LDADD) $(LIBS)
++	$(LINK) $(httpview_plugin_OBJECTS) $(httpview_plugin_LDADD) $(LIBS) $(httpview_plugin_LDFLAGS)
+ 
+ # This directory's subdirectories are mostly independent; you can cd
+ # into them and run `make' without going through this Makefile.

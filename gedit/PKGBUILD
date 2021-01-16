@@ -10,19 +10,33 @@ depends=(gnome-libs)
 source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/gedit-0.5.1.tar.gz"
 	"configure.patch"
+	"fix-ltconfig.patch"
+	"fix-editor-plugins-makefile.patch"
+	"remove-gnome-function-implementation.patch"
+	"remove-duplicate-callbacks.patch"
 )
 md5sums=('81c85575ac6be775d4c4cd06e0974599'
-         'cada285d91bb2443b93e882d8e06641d')
+         'cada285d91bb2443b93e882d8e06641d'
+         'ec70a78265e8c81c9c8713b7c1ad1dd4'
+         'e2d55607c088f014decf59a117ce941c'
+         '8037a2f32c64602f99eea44822e2f4b1'
+         'c4274fb4d04e312b26bb45d40fc3a314')
 
 prepare() {
 	cd "gedit-$pkgver"
 	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
+	patch -p1 -i "$srcdir/fix-editor-plugins-makefile.patch"
+	patch -p1 -i "$srcdir/remove-gnome-function-implementation.patch"
+	patch -p1 -i "$srcdir/remove-duplicate-callbacks.patch"
 }
 
 build() {
 	cd "gedit-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
 	./configure \
-		--prefix=/usr
+		--prefix=/usr \
+		--disable-static
 	make
 }
 

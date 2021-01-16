@@ -1,0 +1,21 @@
+--- a/src/gE_prefs_box.c	1999-02-27 17:00:31.000000000 +0100
++++ b/src/gE_prefs_box.c	2021-01-15 20:43:07.737849454 +0100
+@@ -62,8 +62,6 @@
+ } gE_prefs_data;
+ 
+ static gE_prefs_data *prefs;
+-GList *plugin_list;
+-plugin_callback_struct pl_callbacks;
+ 
+ void cancel()
+ {
+--- a/src/gedit.c	1999-02-18 19:17:06.000000000 +0100
++++ b/src/gedit.c	2021-01-15 20:42:35.124908186 +0100
+@@ -41,7 +41,6 @@
+ 
+ GList *window_list;
+ extern GList *plugins;
+-plugin_callback_struct pl_callbacks;
+ 
+ 
+ void setup_callbacks( plugin_callback_struct *callbacks )
