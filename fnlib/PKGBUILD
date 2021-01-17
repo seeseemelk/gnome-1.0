@@ -1,0 +1,42 @@
+pkgname=fnlib
+pkgver=0.4
+pkgrel=1
+epoch=
+pkgdesc="An old version of fnlin"
+arch=(x86_64)
+url=""
+license=('GPL')
+depends=()
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/fnlib-0.4.tar.gz"
+	"configure.patch"
+	"fix-ltconfig.patch"
+)
+md5sums=('67f0bb2f55aa4a488800136e08a3a2a3'
+         'cada285d91bb2443b93e882d8e06641d'
+         'ec70a78265e8c81c9c8713b7c1ad1dd4')
+
+prepare() {
+	cd "fnlib-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
+}
+
+build() {
+	cd "fnlib-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
+	./configure \
+		--prefix=/usr \
+		--disable-static
+	make
+}
+
+check() {
+	cd "fnlib-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "fnlib-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
