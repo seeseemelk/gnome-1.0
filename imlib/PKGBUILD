@@ -4,7 +4,7 @@ pkgrel=3
 pkgdesc="An old version of imlib"
 arch=(x86_64)
 url=""
-depends=(glib-old libx11 libxext libpng)
+depends=(glib-old libx11 libxext libpng gtk-old)
 license=('GPL')
 source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/imlib-1.9.4.tar.gz"
