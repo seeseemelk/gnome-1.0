@@ -1,0 +1,60 @@
+pkgname=gnome-core
+pkgver=1.0.9
+pkgrel=1
+epoch=
+pkgdesc="An old version of Gnome core"
+arch=(x86_64)
+url=""
+license=('GPL')
+depends=(gnome-libs)
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/gnome-core-1.0.9.tar.gz"
+	"configure.patch"
+	"disable-modemlights.patch"
+	"fix-gsm.patch"
+	"fix-gnome-info2html.patch"
+	"fix-gnome-terminal.patch"
+	"fix-another-clock.patch"
+	"fix-panel.patch"
+	"fix-asclock.patch"
+)
+md5sums=('401b66db20e50612a2a87ae5755f8c90'
+         'cada285d91bb2443b93e882d8e06641d'
+         '231e2085c366b49d85f7b69e0f4f302e'
+         'aebd657ad23213ace78ce9abf923cd78'
+         '50c33bd61dc4fb8c9339ece6fba38c8d'
+         'f5212d6409ee40ba3169e73696d1dcc6'
+         'b81a05cb0ad1608f20b91380b0c7b976'
+         '12fc02659f09e63b57962d476cd1dd85'
+         '10ccee0853b6c76de222bf9c2d9d6a61')
+
+prepare() {
+	cd "gnome-core-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/disable-modemlights.patch"
+	patch -p1 -i "$srcdir/fix-gsm.patch"
+	patch -p1 -i "$srcdir/fix-gnome-info2html.patch"
+	patch -p1 -i "$srcdir/fix-gnome-terminal.patch"
+	patch -p1 -i "$srcdir/fix-another-clock.patch"
+	patch -p1 -i "$srcdir/fix-panel.patch"
+	patch -p1 -i "$srcdir/fix-asclock.patch"
+}
+
+build() {
+	cd "gnome-core-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2/}
+	./configure \
+		--prefix=/usr \
+		--disable-static
+	make
+}
+
+check() {
+	cd "gnome-core-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "gnome-core-$pkgver"
+	make DESTDIR="$pkgdir" install
+}

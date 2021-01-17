@@ -1,0 +1,25 @@
+--- a/gsm/ice.c	1999-07-19 23:14:25.000000000 +0200
++++ b/gsm/ice.c	2021-01-16 22:11:25.907253991 +0100
+@@ -47,9 +47,9 @@
+ GSList *auth_entries;
+ 
+ /* The "sockets" which we listen on */
+-static IceListenObj *sockets;
++IceListenObj *sockets;
+ static gint *input_id;
+-static guint num_sockets;
++guint num_sockets;
+ 
+ /* File containing the ICE authorization data (usually ~/.ICEauthority) */
+ static gchar* authfile;
+--- a/gsm/manager.h	1999-07-19 23:14:26.000000000 +0200
++++ b/gsm/manager.h	2021-01-16 22:11:53.823871735 +0100
+@@ -147,7 +147,7 @@
+ extern IceListenObj *sockets;
+ 
+ /* List of auth entries.  */
+-GSList *auth_entries;
++extern GSList *auth_entries;
+ 
+ /*
+  * manager.c

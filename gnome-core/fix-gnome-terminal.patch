@@ -1,0 +1,10 @@
+--- a/gnome-terminal/gnome-terminal.c	1999-07-08 06:57:08.000000000 +0200
++++ b/gnome-terminal/gnome-terminal.c	2021-01-16 21:46:45.976673604 +0100
+@@ -2295,6 +2295,7 @@
+ 		cfg->termname = g_strdup_printf("TERM=%s", arg);
+ 		break;
+ 	default:
++		break;
+ 	}
+ }
+ 

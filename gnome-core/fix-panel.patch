@@ -1,0 +1,32 @@
+--- a/panel/applet-widget.c	1999-07-19 23:14:26.000000000 +0200
++++ b/panel/applet-widget.c	2021-01-17 11:33:08.322210555 +0100
+@@ -701,7 +701,8 @@
+ 
+ 	applet = APPLET_WIDGET (gtk_type_new (applet_widget_get_type ()));
+ 
+-	CD(applet) = corbadat = gnome_panel_applet_corba_init(applet,goad_id);
++	corbadat = gnome_panel_applet_corba_init(applet, goad_id);
++	APPLET_WIDGET(applet)->corbadat = corbadat;
+ 
+ 	g_return_val_if_fail(corbadat!=NULL,NULL);
+ 
+@@ -974,6 +975,7 @@
+     pptr = backing->_u.pmap;
+     break;
+   default:
++  	break;
+   }
+ 
+   gtk_signal_emit(GTK_OBJECT(servant->appwidget),
+--- a/panel/corner-widget.c	1999-06-03 18:52:27.000000000 +0200
++++ b/panel/corner-widget.c	2021-01-16 22:05:59.377321363 +0100
+@@ -947,8 +947,8 @@
+ 
+ void
+ corner_widget_change_params(CornerWidget *corner,
+-			    CornerPos pos,
+ 			    PanelOrientation orient,
++			    CornerPos pos,
+ 			    CornerMode mode,
+ 			    CornerState state,
+ 			    int hidebuttons_enabled,

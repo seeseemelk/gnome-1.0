@@ -1,0 +1,51 @@
+--- a/configure	1999-07-20 00:59:19.000000000 +0200
++++ b/configure	2021-01-17 11:11:59.652404071 +0100
+@@ -6419,48 +6419,6 @@
+ fi
+ 
+ P_MODEMLIGHTS=
+-for ac_hdr in net/ppp_defs.h
+-do
+-ac_safe=`echo "$ac_hdr" | sed 'y%./+-%__p_%'`
+-echo $ac_n "checking for $ac_hdr""... $ac_c" 1>&6
+-echo "configure:6427: checking for $ac_hdr" >&5
+-if eval "test \"`echo '$''{'ac_cv_header_$ac_safe'+set}'`\" = set"; then
+-  echo $ac_n "(cached) $ac_c" 1>&6
+-else
+-  cat > conftest.$ac_ext <<EOF
+-#line 6432 "configure"
+-#include "confdefs.h"
+-#include <$ac_hdr>
+-EOF
+-ac_try="$ac_cpp conftest.$ac_ext >/dev/null 2>conftest.out"
+-{ (eval echo configure:6437: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }
+-ac_err=`grep -v '^ *+' conftest.out | grep -v "^conftest.${ac_ext}\$"`
+-if test -z "$ac_err"; then
+-  rm -rf conftest*
+-  eval "ac_cv_header_$ac_safe=yes"
+-else
+-  echo "$ac_err" >&5
+-  echo "configure: failed program was:" >&5
+-  cat conftest.$ac_ext >&5
+-  rm -rf conftest*
+-  eval "ac_cv_header_$ac_safe=no"
+-fi
+-rm -f conftest*
+-fi
+-if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
+-  echo "$ac_t""yes" 1>&6
+-    ac_tr_hdr=HAVE_`echo $ac_hdr | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`
+-  cat >> confdefs.h <<EOF
+-#define $ac_tr_hdr 1
+-EOF
+- P_MODEMLIGHTS=modemlights
+-else
+-  echo "$ac_t""no" 1>&6
+-fi
+-done
+-
+-
+-
+ if test "$P_MODEMLIGHTS" = "modemlights"; then
+   APPLET_MODEMLIGHTS_TRUE=
+   APPLET_MODEMLIGHTS_FALSE='#'

@@ -1,0 +1,27 @@
+--- a/help-browser/gnome-info2html/data.h	1999-06-03 18:52:21.000000000 +0200
++++ b/help-browser/gnome-info2html/data.h	2021-01-16 21:50:24.895077977 +0100
+@@ -5,10 +5,10 @@
+ /* many of these are motivated by the source code to the 'info' program */
+ 
+ /* file we're working on */
+-char work_filename[1024];
++extern char work_filename[1024];
+ 
+ /* node we're working on */
+-char work_node[1024];
++extern char work_node[1024];
+ 
+ /* some type's we'll want to use below */
+ typedef struct info_menu_entry MENU_ENTRY;
+--- a/help-browser/gnome-info2html/main.c	1999-06-03 18:52:22.000000000 +0200
++++ b/help-browser/gnome-info2html/main.c	2021-01-16 22:12:47.787095918 +0100
+@@ -10,6 +10,9 @@
+ #include "utils.h"
+ #include "version.h"
+ 
++char work_filename[1024];
++char work_node[1024];
++
+ /* be quiet or not? */
+ static int be_quiet=1;
+ 

@@ -1,0 +1,121 @@
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/beats.xpm b/applets/asclock/default_theme/beats.xpm
+--- a/applets/asclock/default_theme/beats.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/beats.xpm	2021-01-17 10:59:06.298328172 +0100
+@@ -1,2 +1,2 @@
+-static char *beats_xpm[] = { NULL };
++char *beats_xpm[] = { NULL };
+ 
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/clock.xpm b/applets/asclock/default_theme/clock.xpm
+--- a/applets/asclock/default_theme/clock.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/clock.xpm	2021-01-17 10:59:13.275094141 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * clock_xpm[] = {
++char * clock_xpm[] = {
+ "128 48 49 1",
+ " 	c None",
+ ".	c #040204",
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/date.xpm b/applets/asclock/default_theme/date.xpm
+--- a/applets/asclock/default_theme/date.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/date.xpm	2021-01-17 10:59:18.875173990 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *date_xpm[] = {
++char *date_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "    60    10      192            2",
+ /* colors */
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/hour.xpm b/applets/asclock/default_theme/hour.xpm
+--- a/applets/asclock/default_theme/hour.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/hour.xpm	2021-01-17 10:58:34.081205589 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * hour_xpm[] = {
++char * hour_xpm[] = {
+ "5 11 3 1",
+ " 	c None   ",
+ ".      c #596b5e",
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/led.xpm b/applets/asclock/default_theme/led.xpm
+--- a/applets/asclock/default_theme/led.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/led.xpm	2021-01-17 10:58:47.964734852 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *led_xpm[] = {
++char *led_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "   180    12      242            2",
+ /* colors */
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/minute.xpm b/applets/asclock/default_theme/minute.xpm
+--- a/applets/asclock/default_theme/minute.xpm	1999-06-03 18:50:00.000000000 +0200
++++ b/applets/asclock/default_theme/minute.xpm	2021-01-17 10:58:16.254288583 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * minute_xpm[] = {
++char * minute_xpm[] = {
+ "5 15 3 1",
+ " 	c None   ",
+ "+      c #596b5e",
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/month.xpm b/applets/asclock/default_theme/month.xpm
+--- a/applets/asclock/default_theme/month.xpm	1999-06-03 18:50:03.000000000 +0200
++++ b/applets/asclock/default_theme/month.xpm	2021-01-17 10:58:57.624871666 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * month_xpm[] = {
++char * month_xpm[] = {
+ "24 120 123 2",
+ "  	c None",
+ ". 	c #B4B6A4",
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/second.xpm b/applets/asclock/default_theme/second.xpm
+--- a/applets/asclock/default_theme/second.xpm	1999-06-03 18:50:03.000000000 +0200
++++ b/applets/asclock/default_theme/second.xpm	2021-01-17 10:58:21.664364406 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * second_xpm[] = {
++char * second_xpm[] = {
+ "5 20 2 1",
+ " 	c None   ",
+ "+	c #0C110D",
+diff -u --from a/applets/asclock/default_theme/ a/applets/asclock/default_theme/weekday.xpm b/applets/asclock/default_theme/weekday.xpm
+--- a/applets/asclock/default_theme/weekday.xpm	1999-06-03 18:50:04.000000000 +0200
++++ b/applets/asclock/default_theme/weekday.xpm	2021-01-17 10:59:24.688590351 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *weekday_xpm[] = {
++char *weekday_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "    60    70      110            2",
+ /* colors */
+--- a/applets/asclock/asclock.h	1999-06-03 18:49:59.000000000 +0200
++++ b/applets/asclock/asclock.h	2021-01-17 11:00:06.019184399 +0100
+@@ -73,8 +73,8 @@
+ extern char *themes_directories[];
+ 
+ extern gint visual_depth;
+-GdkVisual *visual;
+-GdkColormap *cmap;
++extern GdkVisual *visual;
++extern GdkColormap *cmap;
+ 
+ /* the xpm data */
+ extern char *clock_xpm[];
+--- a/applets/asclock/asclock.c	1999-06-03 18:49:59.000000000 +0200
++++ b/applets/asclock/asclock.c	2021-01-17 11:03:07.795198300 +0100
+@@ -63,6 +63,9 @@
+ 
+ gint visual_depth=0;
+ 
++GdkVisual *visual;
++GdkColormap *cmap;
++
+ /* when invoked (via signal delete_event), terminates the application.
+  */
+ static void close_application( GtkWidget *widget, GdkEvent *event, gpointer *data ) {
+@@ -438,7 +441,7 @@
+     textdomain(PACKAGE);
+ 
+     my = (asclock *)malloc(sizeof(asclock));
+-    memset(my, sizeof(my), 0);
++    memset(my, 0, sizeof(asclock));
+     config();
+     
+     /* create the main window, and attach delete_event signal to terminating

@@ -1,0 +1,11 @@
+--- a/applets/another_clock/another_clock.c	1999-06-03 18:49:59.000000000 +0200
++++ b/applets/another_clock/another_clock.c	2021-01-16 22:10:56.403966342 +0100
+@@ -308,7 +308,7 @@
+     static const gchar *authors[] = {
+ 			    /* languages which use font encodings that can't
+ 			     * display spanish 'ñ' should use 'n' instead */
+-			    N_("Iñigo Serna <inigo@gaztelan.bi.ehu.es>"),
++			    ("A name that couldn't be parsed properly <inigo@gaztelan.bi.ehu.es>"),
+ 			    NULL
+     };
+ 
