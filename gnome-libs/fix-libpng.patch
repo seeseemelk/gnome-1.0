@@ -1,5 +1,5 @@
 --- a/gtk-xmhtml/readPNG.c	1999-07-29 22:36:03.000000000 +0200
-+++ b/gtk-xmhtml/readPNG.c	2021-01-15 20:24:44.911421480 +0100
++++ b/gtk-xmhtml/readPNG.c	2021-01-17 09:54:30.188829320 +0100
 @@ -202,7 +202,7 @@
  
  	_XmHTMLWarning(__WFUNC__(NULL, "png_error"),
@@ -34,7 +34,7 @@
  	/* no of colors */
 -	ncolors = img_data->cmapsize = info_ptr->num_palette;
 +	png_color* palette;
-+	size_t palette_size;
++	int palette_size;
 +	png_get_PLTE(png_ptr, info_ptr, &palette, &palette_size);
 +	ncolors = img_data->cmapsize = palette_size;
  
@@ -58,7 +58,7 @@
  				/* store colormap and allocate buffer for read image data */
  				AllocRawImageCmap(img_data, ncolors);
 +				png_color* palette;
-+				size_t palette_size;
++				int palette_size;
 +				png_get_PLTE(png_ptr, info_ptr, &palette, &palette_size);
  				for(i = 0; i < ncolors; i++)
  				{
@@ -89,7 +89,7 @@
  			my_png_error(png_ptr, msg);
  			break;
  	}
-@@ -512,16 +518,18 @@
+@@ -512,16 +518,22 @@
  	* Doing that for alpha channel images would change the colortype of the
  	* current image, leading to weird results.
  	*/
@@ -109,11 +109,15 @@
 -	if(info_ptr->valid & PNG_INFO_gAMA)
 -		fg_gamma = info_ptr->gamma;
 +	if(png_get_valid(png_ptr, info_ptr, PNG_INFO_gAMA))
-+		fg_gamma = png_get_gamme(png_ptr, info_ptr);
++	{
++		double gamma;
++		png_get_gAMA(png_ptr, info_ptr, &gamma);
++		fg_gamma = gamma;
++	}
  	else
  		fg_gamma = 0.45;
  
-@@ -532,20 +540,20 @@
+@@ -532,20 +544,20 @@
  	/* dithering gets handled by caller */
  
  	/* one byte per pixel */
@@ -137,7 +141,7 @@
  
  	/* new color_type? */
  	if(color_type == PNG_COLOR_TYPE_RGB_ALPHA)
-@@ -565,10 +573,10 @@
+@@ -565,10 +577,10 @@
  		* will call doAlphaChannel to do the actual image creation. 
  		*/
  		row_ptrs = (png_bytep*)malloc(height*sizeof(png_bytep));
@@ -150,7 +154,7 @@
  
  		/* read it */
  		png_read_image(png_ptr, row_ptrs);
-@@ -597,7 +605,7 @@
+@@ -597,7 +609,7 @@
  	row_ptrs = (png_bytep*)malloc(height*sizeof(png_bytep));
  
  	for(i = 0; i < height; ++i)
