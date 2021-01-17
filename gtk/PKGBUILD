@@ -4,7 +4,7 @@ pkgrel=3
 pkgdesc="An old version of GTK"
 arch=(x86_64)
 url=""
-depends=(glib-old)
+depends=(glib-old libxmu libxt)
 license=('GPL')
 source=(
 	"https://download.gnome.org/desktop/1.0/1.0/sources/gtk%2B-1.2.2.tar.gz"
