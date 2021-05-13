@@ -1,6 +1,6 @@
 pkgname=gedit-old
 pkgver=0.5.1
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="An old version of gedit"
 arch=(x86_64)
@@ -14,13 +14,15 @@ source=(
 	"fix-editor-plugins-makefile.patch"
 	"remove-gnome-function-implementation.patch"
 	"remove-duplicate-callbacks.patch"
+	"font-segfault.patch"
 )
 md5sums=('81c85575ac6be775d4c4cd06e0974599'
          'cada285d91bb2443b93e882d8e06641d'
          'ec70a78265e8c81c9c8713b7c1ad1dd4'
          'e2d55607c088f014decf59a117ce941c'
          '8037a2f32c64602f99eea44822e2f4b1'
-         'c4274fb4d04e312b26bb45d40fc3a314')
+         'c4274fb4d04e312b26bb45d40fc3a314'
+         'a90f117a2b37f9a2e703c46b1026d0f6')
 
 prepare() {
 	cd "gedit-$pkgver"
@@ -29,6 +31,7 @@ prepare() {
 	patch -p1 -i "$srcdir/fix-editor-plugins-makefile.patch"
 	patch -p1 -i "$srcdir/remove-gnome-function-implementation.patch"
 	patch -p1 -i "$srcdir/remove-duplicate-callbacks.patch"
+	patch -p1 -i "$srcdir/font-segfault.patch"
 }
 
 build() {

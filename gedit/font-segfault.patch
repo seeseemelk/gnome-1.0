@@ -1,0 +1,31 @@
+--- a/src/gE_document.c	1999-02-18 19:10:08.000000000 +0100
++++ b/src/gE_document.c	2021-05-13 19:57:33.795332808 +0200
+@@ -326,12 +326,9 @@ gE_document
+ 
+ 	style = gtk_style_new();
+   	gdk_font_unref (style->font);
+- 	 style->font = gdk_font_load (w->font);
+-  	if (style->font == NULL)
+-  	 {
+-  	 style->font = gdk_font_load ("-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1");
+-  	 	w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
+-  	 } 
++  	GdkFont* newFont = gdk_font_load (w->font);
++  	if (newFont != NULL)
++  		style->font = newFont;
+   	 
+  	 gtk_widget_push_style (style);     
+    	 gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);
+--- a/src/gE_prefs_box.c	1999-02-27 17:00:31.000000000 +0100
++++ b/src/gE_prefs_box.c	2021-05-13 20:03:11.735293139 +0200
+@@ -87,7 +87,9 @@ gint i;
+     
+   style = gtk_style_new();
+   gdk_font_unref (style->font);
+-  style->font = gdk_font_load (w->font);
++  GdkFont* newFont = gdk_font_load (w->font);
++  if (newFont != NULL)
++    style->font = newFont;
+   
+   gtk_widget_push_style (style);    
+   for (i = 0; i < g_list_length (w->documents); i++)
