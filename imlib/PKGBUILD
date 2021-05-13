@@ -1,46 +1,48 @@
-pkgname=imlib
-pkgver=1.9.4
-pkgrel=3
-pkgdesc="An old version of imlib"
-arch=(x86_64)
-url=""
-depends=(glib-old libx11 libxext libpng gtk-old)
+# Maintainer: Eric Bélanger <eric@archlinux.org>
+
+pkgname=imlib-gdk
+pkgver=1.9.15
+pkgrel=17
+pkgdesc="General image handling library for X11 and Gtk"
+arch=('x86_64')
+url="http://freshmeat.net/projects/imlib/"
 license=('GPL')
-source=(
-	"https://download.gnome.org/desktop/1.0/1.0/sources/imlib-1.9.4.tar.gz"
-	"configure.patch"
-	"fix-build-errors.patch"
-	"fix-open-missing-mode.patch"
-	"fix-ltconfig.patch"
-)
-md5sums=('8d0e50e28a5b203ff76f114bb38627c7'
-         '6478976838c0419de12b0a8b7fffafd4'
-         'c6ac6f9647743b0d1373437b6100cf37'
-         'f811e6c4e7370a4f4f8a1d0d1a583d5e'
-         'ec70a78265e8c81c9c8713b7c1ad1dd4')
+depends=('giflib' 'libpng' 'libtiff' 'libxext')
+makedepends=('libxt')
+provides=('imlib=1.9.15')
+conflicts=('imlib')
+source=(https://ftp.gnome.org/pub/GNOME/sources/imlib/1.9/imlib-${pkgver}.tar.bz2
+        debian-bug448360.patch CAN-2004-1026.patch aclocal-fixes.patch 
+        imlib-1.9.15-libpng15.patch imlib-giflib51.patch)
+sha512sums=('f50d9141b3c54b44921aa09c0a5ea848aefaa904efdd6da132dace42604671f8dbd3e4b71a596f054f0db4525ba2002864b5e5b21f8805cf1b5514b661ac254a'
+            '0c805568c54149239a3106293e7a4f5abe127abebc1a851cda87958fede996d6c0415fe1b47a7f023f2deb2e3460204d5aae4fce5787e402a026d46c2e7e662c'
+            'a75537267e9e276920fbc0360cd4832f727c6c9857401889bdb1466f3088c98e5ea2ef84a94a5873a3c12dda0b9aed36a5e2039fece87e51154a3b773d97aa5c'
+            'ca4d2a047ee07f25bb462c8b34fc8298ef9a31b39f83309598a696973534e144f8f02a130bb764737dfbd329073e64abe4f8a673d66731822fece4969d7ab02a'
+            'e7a6d48ef04fbcfcab998e6968130796ab3da1fd9def14ab2ccc713e0956f1f2be3f3a8f680ded5f00cb7ac9ea31d2f94de04aaa039ec5b03cece71f36f14294'
+            '91a62ed701974b953c2bc4f6b530ea7614b2195906110fcdc45bb200acacea0c54d431c3eafdcd2b33877606ef6b23bd34d051f99f90e5505d8e725b78278c89')
 
 prepare() {
-	cd "imlib-$pkgver"
-	patch -p1 -i "$srcdir/configure.patch"
-	patch -p1 -i "$srcdir/fix-build-errors.patch"
-	patch -p1 -i "$srcdir/fix-open-missing-mode.patch"
-	patch -p1 -i "$srcdir/fix-ltconfig.patch"
+  cd imlib-${pkgver}
+  patch -p1 -i "${srcdir}/debian-bug448360.patch"
+  patch -p1 -i "${srcdir}/CAN-2004-1026.patch"
+  patch -p0 -i "${srcdir}/aclocal-fixes.patch"
+  patch -p0 -i "${srcdir}/imlib-1.9.15-libpng15.patch"
+  patch -p1 -i "${srcdir}/imlib-giflib51.patch"
+  sed '/AC_PATH_XTRA/d' -i configure.in
+  mv configure.in configure.ac
+  libtoolize --force
+  cp /usr/bin/libtool .
 }
 
 build() {
-	cd "imlib-$pkgver"
-	./configure \
-		--prefix=/usr \
-		--disable-static
-	make
-}
-
-check() {
-	cd "imlib-$pkgver"
-	make -k check
+  cd imlib-${pkgver}
+  autoreconf --force --install
+  ./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --enable-shm --disable-static
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  make
 }
 
 package() {
-	cd "imlib-$pkgver"
-	make DESTDIR="$pkgdir/" install
+  cd imlib-${pkgver}
+  make DESTDIR="${pkgdir}" install
 }
