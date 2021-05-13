@@ -1,0 +1,10 @@
+--- a/capplets/screensaver-properties/parser.c	1999-08-04 20:54:50.000000000 +0200
++++ b/capplets/screensaver-properties/parser.c	2021-01-16 12:24:41.329925707 +0100
+@@ -598,6 +598,7 @@ write_field (setup_data *ssd)
+                 set_color (ssd);
+                 break;
+         default:
++			break;
+         }
+ }
+ static void

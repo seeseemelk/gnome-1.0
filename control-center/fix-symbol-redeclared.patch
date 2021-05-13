@@ -1,0 +1,22 @@
+--- a/control-center/tree.c	1999-06-14 19:01:52.000000000 +0200
++++ b/control-center/tree.c	2021-01-16 12:24:15.506594901 +0100
+@@ -319,15 +319,15 @@ generate_tree ()
+ void
+ selected_row_callback (GtkWidget *widget, GtkCTreeNode *node, gint column, gpointer data)
+ {
+-        node_data *data;
++        node_data *nodedata;
+         GnomeDesktopEntry *gde;
+         GdkEvent *event = gtk_get_current_event();
+ 
+-        data = (node_data *) gtk_ctree_node_get_row_data (GTK_CTREE (widget),node);
+-        if (data == NULL)
++        nodedata = (node_data *) gtk_ctree_node_get_row_data (GTK_CTREE (widget),node);
++        if (nodedata == NULL)
+                 return;
+ 
+-        gde = (GnomeDesktopEntry *)data->gde; 
++        gde = (GnomeDesktopEntry *)nodedata->gde; 
+         gnome_appbar_pop (GNOME_APPBAR (status_bar));
+         if (gde->comment)
+                 gnome_appbar_push (GNOME_APPBAR (status_bar), (gde->comment));

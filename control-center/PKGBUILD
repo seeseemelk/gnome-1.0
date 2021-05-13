@@ -1,0 +1,44 @@
+pkgname=gnome-control-center
+pkgver=1.0.6
+pkgrel=1
+epoch=
+pkgdesc="Gnome Control Center"
+arch=(x86_64)
+url=""
+license=('GPL')
+depends=('gtk-old')
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/control-center-1.0.6.tar.gz"
+	"configure.patch"
+	"fix-symbol-redeclared.patch"
+	"fix-missing-break.patch"
+)
+md5sums=('2435a9adc823647296100086850ed262'
+         'cada285d91bb2443b93e882d8e06641d'
+         '12b0828e9535f0b8dece124196d42cb9'
+         '10bbc8a8bda310edde0e0ef1e9f57016')
+
+prepare() {
+	cd "control-center-$pkgver"
+	patch -p1 -i ../configure.patch
+	patch -p1 -i ../fix-symbol-redeclared.patch
+	patch -p1 -i ../fix-missing-break.patch
+}
+
+build() {
+	cd "control-center-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2}
+	./configure \
+		--prefix=/usr
+	make
+}
+
+check() {
+	cd "control-center-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "control-center-$pkgver"
+	make prefix="$pkgdir/usr/" install
+}
