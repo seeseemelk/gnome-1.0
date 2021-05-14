@@ -1,0 +1,10 @@
+--- a/gmenu/edit.c	1999-06-03 18:52:18.000000000 +0200
++++ b/gmenu/edit.c	2021-05-14 22:53:51.457787901 +0200
+@@ -155,6 +155,7 @@
+ 			}
+ 		}
+ 
++	gnome_dentry_edit_clear(GNOME_DENTRY_EDIT(ea->dee));
+ 	gnome_dentry_edit_set_dentry(GNOME_DENTRY_EDIT(ea->dee), dentry);
+ 
+ 	/* ugly hack - cause warning otherwise because we didnt make a */

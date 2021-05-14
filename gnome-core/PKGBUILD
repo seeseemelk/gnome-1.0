@@ -1,6 +1,6 @@
 pkgname=gnome-core
 pkgver=1.0.9
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="An old version of Gnome core"
 arch=(x86_64)
@@ -17,6 +17,7 @@ source=(
 	"fix-another-clock.patch"
 	"fix-panel.patch"
 	"fix-asclock.patch"
+	"fix-gmenu.patch"
 )
 md5sums=('401b66db20e50612a2a87ae5755f8c90'
          'cada285d91bb2443b93e882d8e06641d'
@@ -26,7 +27,8 @@ md5sums=('401b66db20e50612a2a87ae5755f8c90'
          'f5212d6409ee40ba3169e73696d1dcc6'
          'b81a05cb0ad1608f20b91380b0c7b976'
          '12fc02659f09e63b57962d476cd1dd85'
-         '10ccee0853b6c76de222bf9c2d9d6a61')
+         '10ccee0853b6c76de222bf9c2d9d6a61'
+         '687abc24a4940cddcc1254c3f4544b36')
 
 prepare() {
 	cd "gnome-core-$pkgver"
@@ -38,6 +40,7 @@ prepare() {
 	patch -p1 -i "$srcdir/fix-another-clock.patch"
 	patch -p1 -i "$srcdir/fix-panel.patch"
 	patch -p1 -i "$srcdir/fix-asclock.patch"
+	patch -p1 -i "$srcdir/fix-gmenu.patch"
 }
 
 build() {
