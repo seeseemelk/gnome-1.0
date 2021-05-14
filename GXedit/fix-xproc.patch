@@ -1,0 +1,24 @@
+--- a/xproc-src/xproc.c	2021-05-13 22:26:58.126455554 +0200
++++ b/xproc-src/xproc.c	2021-05-13 22:44:06.486425841 +0200
+@@ -11,8 +11,8 @@
+  static char tmpstring[1024];
+  int i;
+  strncpy(tmpstring,input_string,1024);
+- (char *)tokens[i=0] = (char *)strtok(tmpstring, " ");
+- while (((char *)tokens[++i] = (char *)strtok(NULL, " ")));
++ tokens[i=0] = (char *)strtok(tmpstring, " ");
++ while ((tokens[++i] = (char *)strtok(NULL, " ")));
+  tokens[i] = NULL;
+  return(tokens[word_number]);
+ }
+@@ -30,8 +30,8 @@
+   strcpy(global_var,out_string);
+   return (char *)global_var; }
+  strncpy(tmpstring,input_string,1024);
+- (char *)tokens[i=0] = (char *)strtok(tmpstring, " ");
+- while(((char *)tokens[++i] = (char *)strtok(NULL, " ")));
++ tokens[i=0] = (char *)strtok(tmpstring, " ");
++ while((tokens[++i] = (char *)strtok(NULL, " ")));
+  tokens[i] = NULL;
+  i++;
+  if(i<starting_at)

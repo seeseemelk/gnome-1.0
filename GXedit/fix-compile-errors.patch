@@ -1,0 +1,135 @@
+--- a/utils.c	2021-05-13 22:26:58.128455563 +0200
++++ b/utils.c	2021-05-13 22:32:48.551301984 +0200
+@@ -25,8 +25,8 @@
+  static char tmpstring[1024];
+  int i;
+  strncpy(tmpstring,input_string,1024);
+- (char *)tokens[i=0] = (char *)strtok(tmpstring, " ");
+- while (((char *)tokens[++i] = (char *)strtok(NULL, " ")));
++ tokens[i=0] = (char *)strtok(tmpstring, " ");
++ while ((tokens[++i] = (char *)strtok(NULL, " ")));
+  tokens[i] = NULL;
+  return(tokens[word_number]);
+ }
+@@ -44,8 +44,8 @@
+   strcpy(global_var,out_string);
+   return (char *)global_var; }
+  strncpy(tmpstring,input_string,1024);
+- (char *)tokens[i=0] = (char *)strtok(tmpstring, " ");
+- while(((char *)tokens[++i] = (char *)strtok(NULL, " ")));
++ tokens[i=0] = (char *)strtok(tmpstring, " ");
++ while((tokens[++i] = (char *)strtok(NULL, " ")));
+  tokens[i] = NULL;
+  i++;
+  if(i<starting_at)
+--- a/gxedit.h	2021-05-13 22:26:58.122455535 +0200
++++ b/gxedit.h	2021-05-13 22:36:58.277228176 +0200
+@@ -25,39 +25,39 @@
+ #define ABOUT "GXedit is a multi function graphical text\neditor made by Patrick Lambert <drow@darkelf.net>"
+ #define HELP1 "GXedit User Manual\n\n"
+ /* this is to keep the config stuff at all times */
+-char search_string[101];
+-char filename[501], home[101], line[513], global_var[513], col_name[101], login[101];
+-char images[101], progname[101], mail_from[101], mail_server[101], cvs_root[101], cvs_dir[101];
+-char temp[1024], temp2[101], news_server[101], subject[101], mirror_remote[101];
+-char bg[101], bg_pixmap[101], font[101], xfm[101], dict[101], doc_dir[101], gzip[101], default_news[101], default_web[101], compile[101];
+-char tmp_name[50], tmp_name2[50], findbuf[512], current_project[512];
+-int toolbar, tooltips, x_size, y_size, x_pos, y_pos, debug, no_cfg, full_tb, set_edit, convert, indent, auto_indent, access_opt, audio, show_project;
+-int run_in_xterm, run_in_bg, autosave, modified, reply, mirr_serv, mirr_cl, mirr_timeout, s, ss, icons, flat, netbar, nonet, old_open, cvs_z3, show_line;
+-int scroll_loc, letters_count, words_count, page_width, line_wrap, mail_cmd, syntax_h, fortune, marked, h_style, tail, tail_t, htmlbar, use_socks;
+-int binded, hs, urlbar, tab_width, sticky_dir;
+-long original;
+-size_t TS;
++extern char search_string[101];
++extern char filename[501], home[101], line[513], global_var[513], col_name[101], login[101];
++extern char images[101], progname[101], mail_from[101], mail_server[101], cvs_root[101], cvs_dir[101];
++extern char temp[1024], temp2[101], news_server[101], subject[101], mirror_remote[101];
++extern char bg[101], bg_pixmap[101], font[101], xfm[101], dict[101], doc_dir[101], gzip[101], default_news[101], default_web[101], compile[101];
++extern char tmp_name[50], tmp_name2[50], findbuf[512], current_project[512];
++extern int toolbar, tooltips, x_size, y_size, x_pos, y_pos, debug, no_cfg, full_tb, set_edit, convert, indent, auto_indent, access_opt, audio, show_project;
++extern int run_in_xterm, run_in_bg, autosave, modified, reply, mirr_serv, mirr_cl, mirr_timeout, s, ss, icons, flat, netbar, nonet, old_open, cvs_z3, show_line;
++extern int scroll_loc, letters_count, words_count, page_width, line_wrap, mail_cmd, syntax_h, fortune, marked, h_style, tail, tail_t, htmlbar, use_socks;
++extern int binded, hs, urlbar, tab_width, sticky_dir;
++extern long original;
++extern size_t TS;
+ /* widgets */
+-GList *last_files;
+-GdkColormap *cmap;
+-GdkColor color, html, sh_c;
+-GtkTooltips *tips;
+-GtkStyle *style;
+-GdkPixmap *pixm;
+-GtkWidget *window, *text, *button, *table, *label, *BMmenu, *menu, *menubutton, *hbox;
+-GtkWidget *menubar, *menuitem, *vscrollbar, *vbox, *vbox3, *window2, *window4, *text2, *sep, *hbox2;
+-GtkWidget *entry_box, *cb1, *eb1, *eb2, *eb3, *eb4, *eb5, *eb6, *eb7, *eb8, *eb9, *eb10, *eb11, *eb12, *eb13, *eb14, *eb15, *eb16, *eb17, *eb18, *eb19, *eb20, *eb21, *eb22, *eb23, *eb24, *eb25, *eb26, *project_list, *url_list;
+-GtkWidget *text_debug, *dw, *submenu, *root_tree, *root_item, *notebook, *submenu2, *noteWin, *noteLabel;
+-GtkWidget *frame, *vbox2, *scrolled_window, *gtklist1, *list_item1, *text3, *handle_box;
+-GtkWidget *line_label;
+-char line_tmp[100];
++extern GList *last_files;
++extern GdkColormap *cmap;
++extern GdkColor color, html, sh_c;
++extern GtkTooltips *tips;
++extern GtkStyle *style;
++extern GdkPixmap *pixm;
++extern GtkWidget *window, *text, *button, *table, *label, *BMmenu, *menu, *menubutton, *hbox;
++extern GtkWidget *menubar, *menuitem, *vscrollbar, *vbox, *vbox3, *window2, *window4, *text2, *sep, *hbox2;
++extern GtkWidget *entry_box, *cb1, *eb1, *eb2, *eb3, *eb4, *eb5, *eb6, *eb7, *eb8, *eb9, *eb10, *eb11, *eb12, *eb13, *eb14, *eb15, *eb16, *eb17, *eb18, *eb19, *eb20, *eb21, *eb22, *eb23, *eb24, *eb25, *eb26, *project_list, *url_list;
++extern GtkWidget *text_debug, *dw, *submenu, *root_tree, *root_item, *notebook, *submenu2, *noteWin, *noteLabel;
++extern GtkWidget *frame, *vbox2, *scrolled_window, *gtklist1, *list_item1, *text3, *handle_box;
++extern GtkWidget *line_label;
++extern char line_tmp[100];
+ #ifdef GTKEDITOR_PATCH
+ GList *entries;
+ #endif
+ #ifdef GTK_1_1
+-GtkWidget *window3;
++extern GtkWidget *window3;
+ #endif
+-FILE *fd, *fd2;
++extern FILE *fd, *fd2;
+ /* functions declarations */
+ char ndcode(char trans);
+ void CB_import_rot13(GtkWidget *widget, GtkFileSelection *fs);
+--- a/gxedit.c	2021-05-13 22:26:58.122455535 +0200
++++ b/gxedit.c	2021-05-13 22:37:01.855224417 +0200
+@@ -8,6 +8,39 @@
+ #include "gxedit.h"
+ #include "pixmaps.h"
+ 
++#include <time.h>
++
++char search_string[101];
++char filename[501], home[101], line[513], global_var[513], col_name[101], login[101];
++char images[101], progname[101], mail_from[101], mail_server[101], cvs_root[101], cvs_dir[101];
++char temp[1024], temp2[101], news_server[101], subject[101], mirror_remote[101];
++char bg[101], bg_pixmap[101], font[101], xfm[101], dict[101], doc_dir[101], gzip[101], default_news[101], default_web[101], compile[101];
++char tmp_name[50], tmp_name2[50], findbuf[512], current_project[512];
++int toolbar, tooltips, x_size, y_size, x_pos, y_pos, debug, no_cfg, full_tb, set_edit, convert, indent, auto_indent, access_opt, audio, show_project;
++int run_in_xterm, run_in_bg, autosave, modified, reply, mirr_serv, mirr_cl, mirr_timeout, s, ss, icons, flat, netbar, nonet, old_open, cvs_z3, show_line;
++int scroll_loc, letters_count, words_count, page_width, line_wrap, mail_cmd, syntax_h, fortune, marked, h_style, tail, tail_t, htmlbar, use_socks;
++int binded, hs, urlbar, tab_width, sticky_dir;
++long original;
++size_t TS;
++
++GList *last_files;
++GdkColormap *cmap;
++GdkColor color, html, sh_c;
++GtkTooltips *tips;
++GtkStyle *style;
++GdkPixmap *pixm;
++GtkWidget *window, *text, *button, *table, *label, *BMmenu, *menu, *menubutton, *hbox;
++GtkWidget *menubar, *menuitem, *vscrollbar, *vbox, *vbox3, *window2, *window4, *text2, *sep, *hbox2;
++GtkWidget *entry_box, *cb1, *eb1, *eb2, *eb3, *eb4, *eb5, *eb6, *eb7, *eb8, *eb9, *eb10, *eb11, *eb12, *eb13, *eb14, *eb15, *eb16, *eb17, *eb18, *eb19, *eb20, *eb21, *eb22, *eb23, *eb24, *eb25, *eb26, *project_list, *url_list;
++GtkWidget *text_debug, *dw, *submenu, *root_tree, *root_item, *notebook, *submenu2, *noteWin, *noteLabel;
++GtkWidget *frame, *vbox2, *scrolled_window, *gtklist1, *list_item1, *text3, *handle_box;
++GtkWidget *line_label;
++char line_tmp[100];
++
++GtkWidget *window3;
++
++FILE *fd, *fd2;
++
+ const gchar *list_item_data_key1 = "list_item_data";
+ 
+ static GtkWidget *new_pixmap_from_file (char *filename, GdkWindow *window, GdkColor *background)

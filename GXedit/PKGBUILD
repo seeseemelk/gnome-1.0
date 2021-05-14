@@ -1,0 +1,43 @@
+pkgname=gxedit
+pkgver=1.22
+pkgrel=1
+epoch=
+pkgdesc="Some kind of text editor"
+arch=(x86_64)
+url=""
+license=('GPL')
+depends=(gnome-libs)
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/GXedit1.22.tar.gz"
+	"fix-compile-errors.patch"
+	"fix-xproc.patch"
+)
+md5sums=('857ffac0e813b50b41e881d9f4cf1a4e'
+         '764953c37142c84a4808744b2eadbb13'
+         '76037e7c0af98f49599c6d89de7d0c5a')
+
+prepare() {
+	cd "GXedit$pkgver"
+	patch -p1 -i "$srcdir/fix-compile-errors.patch"
+	patch -p1 -i "$srcdir/fix-xproc.patch"
+}
+
+build() {
+	cd "GXedit$pkgver"
+	make gxe
+}
+
+package() {
+	cd "GXedit$pkgver"
+
+	install -dm755 \
+		"$pkgdir/usr/bin" \
+		"$pkgdir/usr/share" \
+		"$pkgdir/usr/doc"
+
+	make \
+		INSTALL_DIR="$pkgdir/usr/bin/" \
+		SHARE="$pkgdir/usr/share/" \
+		DOCS="$pkgdir/usr/doc/" \
+		install
+}
