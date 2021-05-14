@@ -1,8 +1,8 @@
-pkgname=gnome-control-center
+pkgname=gnomecc
 pkgver=1.0.6
 pkgrel=1
 epoch=
-pkgdesc="Gnome Control Center"
+pkgdesc="Really old Gnome Control Center"
 arch=(x86_64)
 url=""
 license=('GPL')
