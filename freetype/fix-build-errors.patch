@@ -1,0 +1,50 @@
+--- a/test/ftdump.c	1998-06-05 12:26:15.000000000 +0200
++++ b/test/ftdump.c	2021-01-17 20:49:39.519202446 +0100
+@@ -116,7 +116,7 @@
+     old_memory += *var;
+   }
+ 
+-#define FOOTPRINT( field )  Save_Memory( &memory_footprint.##field )
++#define FOOTPRINT( field )  Save_Memory( &memory_footprint.field )
+ 
+ 
+   static void
+@@ -129,7 +129,7 @@
+   }
+ 
+ #define PRINT_MEM( field, string ) \
+-          Print_Mem( memory_footprint.##field, string )
++          Print_Mem( memory_footprint.field, string )
+ 
+ 
+   /* Print the memory footprint */
+--- a/test/ftzoom.c	1998-06-09 09:22:42.000000000 +0200
++++ b/test/ftzoom.c	2021-01-17 20:50:30.355596356 +0100
+@@ -114,7 +114,7 @@
+   int        xoffset;
+   int        yoffset;
+ 
+-  TT_Raster_Map  Bit;
++  extern TT_Raster_Map  Bit;
+ 
+   int            Fail;
+   int            Num;
+--- a/test/fttimer.c	1998-06-05 11:44:22.000000000 +0200
++++ b/test/fttimer.c	2021-01-17 18:01:29.491415837 +0100
+@@ -25,6 +25,7 @@
+ #include "gmain.h"
+ #include "gdriver.h"
+ #include "gevents.h"
++#include "display.h"
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -68,8 +69,6 @@
+   int             cur_point;
+   unsigned short  cur_contour;
+ 
+-  TT_Raster_Map  Bit;
+-
+   int  Fail;
+   int  Num;
+ 

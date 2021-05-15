@@ -1,0 +1,11 @@
+--- a/ltconfig	1998-03-31 14:18:44.000000000 +0200
++++ b/ltconfig	2021-01-17 17:55:15.980582752 +0100
+@@ -1161,7 +1161,7 @@
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-gnu* | x86_64*)
+   version_type=linux
+   library_names_spec='${libname}${release}.so.$versuffix ${libname}${release}.so.$major $libname.so'
+   soname_spec='${libname}${release}.so.$major'

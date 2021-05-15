@@ -1,0 +1,51 @@
+pkgname=freetype
+pkgver=1.1
+pkgrel=1
+pkgdesc="An old version of Freetype"
+arch=(x86_64)
+url=""
+depends=()
+license=('GPL')
+options=(!makeflags)
+source=(
+	"https://download.gnome.org/desktop/1.0/1.0/sources/freetype-1.1.tar.gz"
+	"configure.patch"
+	"fix-build-errors.patch"
+	"fix-ltconfig.patch"
+)
+md5sums=('374f93425968f882215d0433b65069ed'
+         'cada285d91bb2443b93e882d8e06641d'
+         '9698c650f5d217644d082715c59c4be8'
+         'c0f456399a4c03605806563cea006b6c')
+
+prepare() {
+	cd "freetype-$pkgver"
+	patch -p1 -i "$srcdir/configure.patch"
+	patch -p1 -i "$srcdir/fix-build-errors.patch"
+	patch -p1 -i "$srcdir/fix-ltconfig.patch"
+}
+
+build() {
+	cd "freetype-$pkgver"
+	CPPFLAGS=${CPPFLAGS/-D_FORTIFY_SOURCE=2}
+	./configure \
+		--prefix=/usr \
+		--disable-static
+	make
+}
+
+package() {
+	cd "freetype-$pkgver"
+	cd lib
+	install -dm 755 "$pkgdir/usr/lib"
+	install -m 755 .libs/libttf.so.2.0.0 "$pkgdir/usr/lib"
+	ln -s "$pkgdir/usr/lib/libttf.so.2.0.0" "$pkgdir/usr/lib/libttf.so.2"
+	ln -s "$pkgdir/usr/lib/libttf.so.2.0.0" "$pkgdir/usr/lib/libttf.so"
+
+	install -dm 755 "$pkgdir/usr/include"
+	install -m 755 \
+		freetype.h \
+		fterrid.h \
+		ftnameid.h \
+		"$pkgdir/usr/include"
+}
