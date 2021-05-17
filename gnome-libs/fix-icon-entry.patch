@@ -1,0 +1,37 @@
+--- a/libgnomeui/gnome-icon-entry.c	1999-08-26 20:44:06.000000000 +0200
++++ b/libgnomeui/gnome-icon-entry.c	2021-05-17 09:25:08.711589542 +0200
+@@ -130,22 +131,18 @@
+ 			h = 48;
+ 		}
+ 	}
+-	if(GNOME_IS_PIXMAP(child))
+-		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
+-	else {
+-		gtk_widget_destroy(child);
+-		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+-		gtk_widget_show(child);
+-		gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
+-
+-		if(!GTK_WIDGET_NO_WINDOW(child)) {
+-			gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
+-					    GTK_SIGNAL_FUNC (drag_data_get),ientry);
+-			gtk_drag_source_set (child,
+-					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+-					     drop_types, 1,
+-					     GDK_ACTION_COPY);
+-		}
++	gtk_widget_destroy(child);
++	child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
++	gtk_widget_show(child);
++	gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
++
++	if(!GTK_WIDGET_NO_WINDOW(child)) {
++		gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
++					GTK_SIGNAL_FUNC (drag_data_get),ientry);
++		gtk_drag_source_set (child,
++					 GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
++					 drop_types, 1,
++					 GDK_ACTION_COPY);
+ 	}
+ 	gdk_imlib_destroy_image(im);
+ 	gtk_drag_source_set (ientry->pickbutton,

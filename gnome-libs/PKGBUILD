@@ -1,6 +1,6 @@
 pkgname=gnome-libs
 pkgver=1.0.16
-pkgrel=2
+pkgrel=3
 pkgdesc="An old version of Gnome Libs"
 arch=(x86_64)
 url=""
@@ -15,6 +15,7 @@ source=(
 	"fix-libpng.patch"
 	"fix-colors.patch"
 	"fix-loadpng.patch"
+	"fix-icon-entry.patch"
 )
 md5sums=('7bbaf7b947326ca8d42beca74ae35919'
          'cada285d91bb2443b93e882d8e06641d'
@@ -22,7 +23,8 @@ md5sums=('7bbaf7b947326ca8d42beca74ae35919'
          'ec70a78265e8c81c9c8713b7c1ad1dd4'
          'dcf7122d84408fc3ed6d6c4036a60ea9'
          'e229c67cc3bcf49f89a0ab4f1723c115'
-         'b151bc97b81e8455de68dbc9fda74416')
+         'b151bc97b81e8455de68dbc9fda74416'
+         '0f09a3d8fa132b4dfdd4d3cd79981cf0')
 
 prepare() {
 	cd "gnome-libs-$pkgver"
@@ -32,6 +34,7 @@ prepare() {
 	patch -p1 -i "$srcdir/fix-libpng.patch"
 	patch -p1 -i "$srcdir/fix-colors.patch"
 	patch -p1 -i "$srcdir/fix-loadpng.patch"
+	patch -p1 -i "$srcdir/fix-icon-entry.patch"
 }
 
 build() {
